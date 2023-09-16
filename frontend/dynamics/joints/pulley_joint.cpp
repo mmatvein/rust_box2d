@@ -1,4 +1,5 @@
-b2Joint* World_create_pulley_joint(
+// TODO (Mikael)
+/*b2Joint* World_create_pulley_joint(
     b2World* self,
     b2Body* body_a,
     b2Body* body_b,
@@ -66,4 +67,4 @@ f32 PulleyJoint_get_current_length_a(const b2PulleyJoint* self) {
 }
 f32 PulleyJoint_get_current_length_b(const b2PulleyJoint* self) {
     return self->GetCurrentLengthB();
-}
+}*/

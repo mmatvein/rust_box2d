@@ -1,4 +1,5 @@
-b2Joint* World_create_weld_joint(
+// TODO (Mikael)
+/*b2Joint* World_create_weld_joint(
     b2World* world,
     b2Body* body_a,
     b2Body* body_b,
@@ -55,4 +56,4 @@ void WeldJoint_set_damping_ratio(b2WeldJoint* self, f32 ratio) {
 }
 f32 WeldJoint_get_damping_ratio(const b2WeldJoint* self) {
     return self->GetDampingRatio();
-}
+}*/

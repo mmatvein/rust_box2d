@@ -1,3 +1,5 @@
+// TODO (Mikael)
+/*
 b2Joint* World_create_mouse_joint(
     b2World* self,
     b2Body* body_a,
@@ -50,4 +52,4 @@ void MouseJoint_set_damping_ratio(b2MouseJoint* self, f32 ratio) {
 }
 f32 MouseJoint_get_damping_ratio(const b2MouseJoint* self) {
     return self->GetDampingRatio();
-}
+}*/

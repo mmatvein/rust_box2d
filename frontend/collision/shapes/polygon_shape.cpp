@@ -12,7 +12,8 @@ b2PolygonShape* Shape_as_polygon_shape(b2Shape* self) {
     return static_cast<b2PolygonShape*>(self);
 }
 
-void PolygonShape_set(b2PolygonShape* self,
+// TODO (Mikael)
+/*void PolygonShape_set(b2PolygonShape* self,
                       const b2Vec2* points, i32 count) {
     self->Set(points, count);
 }
@@ -34,4 +35,4 @@ const b2Vec2* PolygonShape_get_vertex(const b2PolygonShape* self,
 }
 bool PolygonShape_validate(const b2PolygonShape* self) {
     return self->Validate();
-}
+}*/

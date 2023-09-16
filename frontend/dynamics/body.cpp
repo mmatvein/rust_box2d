@@ -142,11 +142,11 @@ void Body_set_awake(b2Body* self, bool flag) {
 bool Body_is_awake(const b2Body* self) {
     return self->IsAwake();
 }
-void Body_set_active(b2Body* self, bool flag) {
-    self->SetActive(flag);
+void Body_set_active(b2Body* self, bool flag) { // TODO (Mikael) rename to set_enabled
+    self->SetEnabled(flag);
 }
 bool Body_is_active(const b2Body* self) {
-    return self->IsActive();
+    return self->IsEnabled();
 }
 void Body_set_fixed_rotation(b2Body* self, bool flag) {
     self->SetFixedRotation(flag);
@@ -178,11 +178,12 @@ b2Body* Body_get_next(b2Body* self) {
 const b2Body* Body_get_next_const(const b2Body* self) {
     return self->GetNext();
 }
-void* Body_get_user_data(const b2Body* self) {
+// TODO (Mikael)
+/* void* Body_get_user_data(b2Body* self) {
     return self->GetUserData();
-}
+}*/
 void Body_set_user_data(b2Body* self, void* data) {
-    self->SetUserData(data);
+    //self->SetUserData(data);
 }
 b2World* Body_get_world(b2Body* self) {
     return self->GetWorld();

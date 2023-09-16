@@ -1,4 +1,5 @@
-b2Joint* World_create_distance_joint(
+// TODO (Mikael)
+/*b2Joint* World_create_distance_joint(
     b2World* self,
     b2Body* body_a,
     b2Body* body_b,
@@ -17,7 +18,7 @@ b2Joint* World_create_distance_joint(
     def.localAnchorB = local_anchor_b;
     def.length = length;
     def.frequencyHz = frequency;
-    def.dampingRatio = damping_ratio;
+    def.damping = damping_ratio;
 
     return self->CreateJoint(&def);
 }
@@ -62,4 +63,4 @@ void DistanceJoint_set_damping_ratio(b2DistanceJoint* self,
 }
 f32 DistanceJoint_get_damping_ratio(const b2DistanceJoint* self) {
     return self->GetDampingRatio();
-}
+}*/

@@ -24,11 +24,12 @@ void ChainShape_create_loop(b2ChainShape* self,
     self->CreateLoop(vertices, count);
 }
 
-void ChainShape_create_chain(b2ChainShape* self,
+// TODO (Mikael)
+/*void ChainShape_create_chain(b2ChainShape* self,
                              const b2Vec2* vertices,
                              i32 count) {
     self->CreateChain(vertices, count);
-}
+}*/
 
 const b2Vec2* ChainShape_get_vertices_const(const b2ChainShape* self) {
     return self->m_vertices;
@@ -38,6 +39,8 @@ i32 ChainShape_get_vertex_count(const b2ChainShape* self) {
     return self->m_count;
 }
 
+// TODO (Mikael)
+/*
 bool ChainShape_get_prev_vertex(const b2ChainShape* self, b2Vec2* prev) {
     *prev = self->m_prevVertex;
     return self->m_hasPrevVertex;
@@ -65,6 +68,7 @@ void ChainShape_set_next_vertex(b2ChainShape* self, const b2Vec2* next) {
         self->m_hasNextVertex = false;
     }
 }
+*/
 
 void ChainShape_get_child_edge(const b2ChainShape* self,
                                b2EdgeShape* edge, i32 index) {

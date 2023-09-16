@@ -1,4 +1,5 @@
-b2Joint* World_create_wheel_joint(
+// TODO (Mikael)
+/*b2Joint* World_create_wheel_joint(
     b2World* world,
     b2Body* body_a,
     b2Body* body_b,
@@ -89,4 +90,4 @@ void WheelJoint_set_spring_damping_ratio(b2WheelJoint* self, f32 ratio) {
 }
 f32 WheelJoint_get_spring_damping_ratio(const b2WheelJoint* self) {
     return self->GetSpringDampingRatio();
-}
+}*/

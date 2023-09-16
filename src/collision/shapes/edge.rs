@@ -1,9 +1,9 @@
 use std::mem;
 use std::ptr;
 
-use wrap::*;
-use common::math::Vec2;
 use super::Shape;
+use common::math::Vec2;
+use wrap::*;
 
 wrap_shape! {
     ffi::EdgeShape => EdgeShape
@@ -18,12 +18,16 @@ impl EdgeShape {
 
     pub fn new_with(v1: &Vec2, v2: &Vec2) -> Self {
         let mut s = Self::new();
-        s.set(v1, v2);
+        s.set_two_sided(v1, v2);
         s
     }
 
-    pub fn set(&mut self, v1: &Vec2, v2: &Vec2) {
-        unsafe { ffi::EdgeShape_set(self.mut_ptr(), v1, v2) }
+    pub fn set_one_sided(&mut self, v0: &Vec2, v1: &Vec2, v2: &Vec2, v3: &Vec2) {
+        unsafe { ffi::EdgeShape_set_one_sided(self.mut_ptr(), v0, v1, v2, v3) }
+    }
+
+    pub fn set_two_sided(&mut self, v1: &Vec2, v2: &Vec2) {
+        unsafe { ffi::EdgeShape_set_two_sided(self.mut_ptr(), v1, v2) }
     }
 
     pub fn v1(&self) -> Vec2 {
@@ -93,7 +97,14 @@ pub mod ffi {
         pub fn EdgeShape_drop(slf: *mut EdgeShape);
         pub fn EdgeShape_as_shape(slf: *mut EdgeShape) -> *mut Shape;
         pub fn Shape_as_edge_shape(slf: *mut Shape) -> *mut EdgeShape;
-        pub fn EdgeShape_set(slf: *mut EdgeShape, v1: *const Vec2, v2: *const Vec2);
+        pub fn EdgeShape_set_one_sided(
+            slf: *mut EdgeShape,
+            v0: *const Vec2,
+            v1: *const Vec2,
+            v2: *const Vec2,
+            v3: *const Vec2,
+        );
+        pub fn EdgeShape_set_two_sided(slf: *mut EdgeShape, v1: *const Vec2, v2: *const Vec2);
         pub fn EdgeShape_get_v1(slf: *const EdgeShape) -> Vec2;
         pub fn EdgeShape_set_v1(slf: *mut EdgeShape, v1: Vec2);
         pub fn EdgeShape_get_v2(slf: *const EdgeShape) -> Vec2;

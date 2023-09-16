@@ -1,4 +1,5 @@
-b2Joint* World_create_rope_joint(
+// TODO (Mikael)
+/*b2Joint* World_create_rope_joint(
     b2World* world,
     b2Body* body_a,
     b2Body* body_b,
@@ -39,4 +40,4 @@ f32 RopeJoint_get_max_length(const b2RopeJoint* self) {
 }
 b2LimitState RopeJoint_get_limit_state(const b2RopeJoint* self) {
     return self->GetLimitState();
-}
+}*/

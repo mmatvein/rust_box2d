@@ -34,11 +34,13 @@ b2Fixture* Fixture_get_next(b2Fixture* self) {
 const b2Fixture* Fixture_get_next_const(const b2Fixture* self) {
     return self->GetNext();
 }
-void* Fixture_get_user_data(const b2Fixture* self) {
+// TODO (Mikael)
+/*void* Fixture_get_user_data(b2Fixture* self) {
     return self->GetUserData();
-}
+}*/
 void Fixture_set_user_data(b2Fixture* self, void* data) {
-    self->SetUserData(data);
+    auto userData = self->GetUserData();
+    userData.pointer = reinterpret_cast<uintptr_t>(data);
 }
 bool Fixture_test_point(const b2Fixture* self, const b2Vec2* p) {
     return self->TestPoint(*p);

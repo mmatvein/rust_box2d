@@ -12,11 +12,18 @@ b2EdgeShape* Shape_as_edge_shape(b2Shape* self) {
     return static_cast<b2EdgeShape*>(self);
 }
 
-void EdgeShape_set(b2EdgeShape* self,
-                   const b2Vec2* v1, const b2Vec2* v2) {
-    self->Set(*v1, *v2);
+void EdgeShape_set_one_sided(b2EdgeShape* self,
+                   const b2Vec2* v0, const b2Vec2* v1, const b2Vec2* v2, const b2Vec2* v3) {
+    self->SetOneSided(*v0, *v1, *v2, *v3);
 }
 
+void EdgeShape_set_two_sided(b2EdgeShape* self,
+                   const b2Vec2* v1, const b2Vec2* v2) {
+    self->SetTwoSided(*v1, *v2);
+}
+
+// TODO (Mikael)
+/*
 b2Vec2 EdgeShape_get_v1(const b2EdgeShape* self) {
     return self->m_vertex1;
 }
@@ -59,4 +66,4 @@ void EdgeShape_set_v3(b2EdgeShape* self, const b2Vec2* v3) {
     } else {
         self->m_hasVertex3 = false;
     }
-}
+}*/

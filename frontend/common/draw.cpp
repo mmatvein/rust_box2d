@@ -39,6 +39,14 @@ struct DrawLink: public b2Draw {
         draw_transform(object, &xf);
     }
 
+	void DrawParticles(const b2Vec2 *centers, float radius, const b2ParticleColor *colors, int32 count) {
+        // TODO (Mikael)
+    }
+
+    void DrawPoint(const b2Vec2& p, float size, const b2Color& color) {
+        // TODO (Mikael)
+    }
+
     RustObject object;
     DrawPolygonCB draw_polygon;
     DrawPolygonCB draw_solid_polygon;

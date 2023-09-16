@@ -40,8 +40,8 @@ void World_step(b2World* self,
 void World_clear_forces(b2World* self) {
     self->ClearForces();
 }
-void World_draw_debug_data(b2World* self) {
-    self->DrawDebugData();
+void World_debug_draw(b2World* self) {
+    self->DebugDraw();
 }
 void World_query_aabb(const b2World* self,
                       b2QueryCallback* callback,

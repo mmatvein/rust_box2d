@@ -1,3 +1,5 @@
+#include <box2d/b2_distance.h>
+
 void WorldManifold_Initialize(b2WorldManifold* self,
                               const b2Manifold* manifold,
                               const b2Transform* xf_a, f32 radius_a,
@@ -32,9 +34,11 @@ void distance(b2DistanceOutput* output,
     b2Distance(output, cache, input);
 }
 
+// TODO (Mikael)
+/*
 void time_of_impact(b2TOIOutput* output, const b2TOIInput* input) {
     b2TimeOfImpact(output, input);
-}
+}*/
 
 
 b2Manifold* Contact_get_manifold(b2Contact* self) {
