@@ -13,13 +13,14 @@ license = "zlib-acknowledgement"
 build = "build.rs"
 
 exclude = [
-    "Box2D/Contributions/*",
-    "Box2D/Box2D/Build/*",
-    "Box2D/Box2D/Documentation/*",
-    "Box2D/Box2D/glew/*",
-    "Box2D/Box2D/glfw/*",
-    "Box2D/Box2D/HelloWorld/*",
-    "Box2D/Box2D/Testbed/*",
+    "Box2D/contributions/*",
+    "Box2D/build/*",
+    "Box2D/documentation/*",
+    "Box2D/glew/*",
+    "Box2D/glfw/*",
+    "Box2D/helloWorld/*",
+    "Box2D/testbed/*",
+    "Box2D/unit-test/*",
 ]
 
 [features]
