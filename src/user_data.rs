@@ -33,7 +33,7 @@ pub trait RawUserData: Sized {
 #[doc(hidden)]
 pub trait RawUserDataMut: RawUserData {
     unsafe fn internal_user_data_mut<T: ?Sized, U>(self) -> *mut InternalUserData<T, U>;
-    unsafe fn set_internal_user_data<T: ?Sized, U>(self, *mut InternalUserData<T, U>);
+    unsafe fn set_internal_user_data<T: ?Sized, U>(self, _: *mut InternalUserData<T, U>);
 }
 
 macro_rules! impl_raw_user_data {
@@ -86,10 +86,10 @@ pub trait UserData<U> {
 
 #[doc(hidden)]
 pub mod ffi {
-    pub use ffi::Any;
     pub use dynamics::body::ffi::Body;
     pub use dynamics::fixture::ffi::Fixture;
     pub use dynamics::joints::ffi::Joint;
+    pub use ffi::Any;
 
     extern "C" {
         pub fn Body_get_user_data(slf: *const Body) -> Any;
