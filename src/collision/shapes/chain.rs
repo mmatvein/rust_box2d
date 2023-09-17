@@ -1,10 +1,10 @@
-use std::mem;
 use std::ptr;
 use std::slice;
 
-use wrap::*;
 use common::math::Vec2;
-use super::{Shape, EdgeShape};
+use wrap::*;
+
+use super::{EdgeShape, Shape};
 
 wrap_shape! {
     ffi::ChainShape => ChainShape
@@ -23,9 +23,9 @@ impl ChainShape {
         s
     }
 
-    pub fn new_chain(vertices: &[Vec2]) -> Self {
+    pub fn new_chain(vertices: &[Vec2], prev_vertex: Option<Vec2>, next_vertex: Option<Vec2>) -> Self {
         let mut s = Self::new();
-        s.create_chain(vertices);
+        s.create_chain(vertices, prev_vertex, next_vertex);
         s
     }
 
@@ -39,9 +39,11 @@ impl ChainShape {
         }
     }
 
-    pub fn create_chain(&mut self, vertices: &[Vec2]) {
+    pub fn create_chain(&mut self, vertices: &[Vec2], prev_vertex: Option<Vec2>, next_vertex: Option<Vec2>) {
         unsafe {
-            ffi::ChainShape_create_chain(self.mut_ptr(), vertices.as_ptr(), vertices.len() as i32)
+            let prev_vertex_ptr = prev_vertex.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
+            let next_vertex_ptr = next_vertex.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
+            ffi::ChainShape_create_chain(self.mut_ptr(), vertices.as_ptr(), vertices.len() as i32, prev_vertex_ptr, next_vertex_ptr);
         }
     }
 
@@ -51,38 +53,6 @@ impl ChainShape {
             let count = ffi::ChainShape_get_vertex_count(self.ptr());
             slice::from_raw_parts(vertices, count as usize)
         }
-    }
-
-    pub fn prev_vertex(&self) -> Option<Vec2> {
-        unsafe {
-            let mut v = mem::MaybeUninit::uninit();
-            if ffi::ChainShape_get_prev_vertex(self.ptr(), &mut *v.as_mut_ptr()) {
-                Some(v.assume_init())
-            } else {
-                None
-            }
-        }
-    }
-
-    pub fn set_prev_vertex(&mut self, v: Option<Vec2>) {
-        let ptr = v.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
-        unsafe { ffi::ChainShape_set_prev_vertex(self.mut_ptr(), ptr) }
-    }
-
-    pub fn next_vertex(&self) -> Option<Vec2> {
-        unsafe {
-            let mut v = mem::MaybeUninit::uninit();
-            if ffi::ChainShape_get_next_vertex(self.ptr(), &mut *v.as_mut_ptr()) {
-                Some(v.assume_init())
-            } else {
-                None
-            }
-        }
-    }
-
-    pub fn set_next_vertex(&mut self, v: Option<Vec2>) {
-        let ptr = v.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
-        unsafe { ffi::ChainShape_set_next_vertex(self.mut_ptr(), ptr) }
     }
 
     pub fn child_edge(&self, index: i32) -> EdgeShape {
@@ -102,8 +72,8 @@ impl Drop for ChainShape {
 
 #[doc(hidden)]
 pub mod ffi {
-    pub use collision::shapes::ffi::Shape;
     pub use collision::shapes::edge::ffi::EdgeShape;
+    pub use collision::shapes::ffi::Shape;
     use common::math::Vec2;
 
     pub enum ChainShape {}
@@ -115,13 +85,9 @@ pub mod ffi {
         pub fn Shape_as_chain_shape(slf: *mut Shape) -> *mut ChainShape;
         pub fn ChainShape_clear(slf: *mut ChainShape);
         pub fn ChainShape_create_loop(slf: *mut ChainShape, vertices: *const Vec2, count: i32);
-        pub fn ChainShape_create_chain(slf: *mut ChainShape, vertices: *const Vec2, count: i32);
+        pub fn ChainShape_create_chain(slf: *mut ChainShape, vertices: *const Vec2, count: i32, prev: *const Vec2, next: *const Vec2);
         pub fn ChainShape_get_vertices_const(slf: *const ChainShape) -> *const Vec2;
         pub fn ChainShape_get_vertex_count(slf: *const ChainShape) -> i32;
-        pub fn ChainShape_get_prev_vertex(slf: *const ChainShape, prev: &mut Vec2) -> bool;
-        pub fn ChainShape_set_prev_vertex(slf: *mut ChainShape, vertex: *const Vec2);
-        pub fn ChainShape_get_next_vertex(slf: *const ChainShape, next: &mut Vec2) -> bool;
-        pub fn ChainShape_set_next_vertex(slf: *mut ChainShape, vertex: *const Vec2);
         pub fn ChainShape_get_child_edge(slf: *const ChainShape,
                                          edge: *mut EdgeShape,
                                          index: i32);
