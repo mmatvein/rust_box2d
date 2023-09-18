@@ -23,7 +23,7 @@ impl ChainShape {
         s
     }
 
-    pub fn new_chain(vertices: &[Vec2], prev_vertex: Option<Vec2>, next_vertex: Option<Vec2>) -> Self {
+    pub fn new_chain(vertices: &[Vec2], prev_vertex: &Vec2, next_vertex: &Vec2) -> Self {
         let mut s = Self::new();
         s.create_chain(vertices, prev_vertex, next_vertex);
         s
@@ -39,10 +39,10 @@ impl ChainShape {
         }
     }
 
-    pub fn create_chain(&mut self, vertices: &[Vec2], prev_vertex: Option<Vec2>, next_vertex: Option<Vec2>) {
+    pub fn create_chain(&mut self, vertices: &[Vec2], prev_vertex: &Vec2, next_vertex: &Vec2) {
         unsafe {
-            let prev_vertex_ptr = prev_vertex.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
-            let next_vertex_ptr = next_vertex.as_ref().map(|v0| v0 as *const _).unwrap_or(ptr::null());
+            let prev_vertex_ptr = prev_vertex as *const _;
+            let next_vertex_ptr = next_vertex as *const _;
             ffi::ChainShape_create_chain(self.mut_ptr(), vertices.as_ptr(), vertices.len() as i32, prev_vertex_ptr, next_vertex_ptr);
         }
     }
