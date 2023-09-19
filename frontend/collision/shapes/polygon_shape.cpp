@@ -12,8 +12,7 @@ b2PolygonShape* Shape_as_polygon_shape(b2Shape* self) {
     return static_cast<b2PolygonShape*>(self);
 }
 
-// TODO (Mikael)
-/*void PolygonShape_set(b2PolygonShape* self,
+void PolygonShape_set(b2PolygonShape* self,
                       const b2Vec2* points, i32 count) {
     self->Set(points, count);
 }
@@ -27,12 +26,12 @@ void PolygonShape_set_as_oriented_box(b2PolygonShape* self,
     self->SetAsBox(hw, hh, *center, angle);
 }
 i32 PolygonShape_get_vertex_count(const b2PolygonShape* self) {
-    return self->GetVertexCount();
+    return self->m_count;
 }
 const b2Vec2* PolygonShape_get_vertex(const b2PolygonShape* self,
                                       i32 index) {
-    return &self->GetVertex(index);
+    return &self->m_vertices[index];
 }
 bool PolygonShape_validate(const b2PolygonShape* self) {
     return self->Validate();
-}*/
+}

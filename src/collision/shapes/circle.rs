@@ -1,6 +1,6 @@
-use wrap::*;
-use common::math::Vec2;
 use super::Shape;
+use common::math::Vec2;
+use wrap::*;
 
 wrap_shape! {
     ffi::CircleShape => CircleShape
@@ -18,26 +18,6 @@ impl CircleShape {
         circle.set_position(position);
         circle.set_radius(radius);
         circle
-    }
-
-    pub fn support(&self, dir: &Vec2) -> i32 {
-        unsafe { ffi::CircleShape_get_support(self.ptr(), dir) }
-    }
-
-    pub fn support_vertex<'a>(&'a self, dir: &Vec2) -> &'a Vec2 {
-        unsafe {
-            &*ffi::CircleShape_get_support_vertex(self.ptr(), dir) // Comes from a C++ &
-        }
-    }
-
-    pub fn vertex_count(&self) -> i32 {
-        unsafe { ffi::CircleShape_get_vertex_count(self.ptr()) }
-    }
-
-    pub fn vertex<'a>(&'a self, index: i32) -> &'a Vec2 {
-        unsafe {
-            &*ffi::CircleShape_get_vertex(self.ptr(), index) // Comes from a C++ &
-        }
     }
 
     pub fn radius(&self) -> f32 {
@@ -76,12 +56,6 @@ pub mod ffi {
         pub fn CircleShape_drop(slf: *mut CircleShape);
         pub fn CircleShape_as_shape(slf: *mut CircleShape) -> *mut Shape;
         pub fn Shape_as_circle_shape(slf: *mut Shape) -> *mut CircleShape;
-        pub fn CircleShape_get_support(slf: *const CircleShape, d: *const Vec2) -> i32;
-        pub fn CircleShape_get_support_vertex(slf: *const CircleShape,
-                                              d: *const Vec2)
-                                              -> *const Vec2;
-        pub fn CircleShape_get_vertex_count(slf: *const CircleShape) -> i32;
-        pub fn CircleShape_get_vertex(slf: *const CircleShape, index: i32) -> *const Vec2;
         pub fn CircleShape_get_pos(slf: *const CircleShape) -> Vec2;
         pub fn CircleShape_set_pos(slf: *mut CircleShape, pos: Vec2);
     }

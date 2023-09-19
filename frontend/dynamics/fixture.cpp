@@ -34,10 +34,9 @@ b2Fixture* Fixture_get_next(b2Fixture* self) {
 const b2Fixture* Fixture_get_next_const(const b2Fixture* self) {
     return self->GetNext();
 }
-// TODO (Mikael)
-/*void* Fixture_get_user_data(b2Fixture* self) {
-    return self->GetUserData();
-}*/
+void* Fixture_get_user_data(b2Fixture* self) {
+    return reinterpret_cast<void*>(self->GetUserData().pointer);
+}
 void Fixture_set_user_data(b2Fixture* self, void* data) {
     auto userData = self->GetUserData();
     userData.pointer = reinterpret_cast<uintptr_t>(data);

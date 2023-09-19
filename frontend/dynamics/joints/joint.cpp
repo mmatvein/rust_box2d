@@ -27,14 +27,13 @@ b2Joint* Joint_get_next(b2Joint* self) {
 const b2Joint* Joint_get_next_const(const b2Joint* self) {
     return self->GetNext();
 }
-// TODO (Mikael)
-/*
-void* Joint_get_user_data(const b2Joint* self) {
-    return self->GetUserData();
+void* Joint_get_user_data(b2Joint* self) {
+    return reinterpret_cast<void*>(self->GetUserData().pointer);
 }
 void Joint_set_user_data(b2Joint* self, void* data) {
-    self->SetUserData(data);
-}*/
+    auto userData = self->GetUserData();
+    userData.pointer = reinterpret_cast<uintptr_t>(data);
+}
 bool Joint_is_enabled(const b2Joint* self) {
     return self->IsEnabled();
 }

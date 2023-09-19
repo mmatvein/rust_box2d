@@ -178,12 +178,12 @@ b2Body* Body_get_next(b2Body* self) {
 const b2Body* Body_get_next_const(const b2Body* self) {
     return self->GetNext();
 }
-// TODO (Mikael)
-/* void* Body_get_user_data(b2Body* self) {
-    return self->GetUserData();
-}*/
+void* Body_get_user_data(b2Body* self) {
+    return reinterpret_cast<void*>(self->GetUserData().pointer);
+}
 void Body_set_user_data(b2Body* self, void* data) {
-    //self->SetUserData(data);
+    auto userData = self->GetUserData();
+    userData.pointer = reinterpret_cast<uintptr_t>(data);
 }
 b2World* Body_get_world(b2Body* self) {
     return self->GetWorld();
