@@ -1,4 +1,3 @@
-use std::ptr;
 use std::slice;
 
 use common::math::Vec2;
