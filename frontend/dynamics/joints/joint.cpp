@@ -35,7 +35,7 @@ void* Joint_get_user_data(const b2Joint* self) {
 void Joint_set_user_data(b2Joint* self, void* data) {
     self->SetUserData(data);
 }*/
-bool Joint_is_active(const b2Joint* self) {
+bool Joint_is_enabled(const b2Joint* self) {
     return self->IsEnabled();
 }
 bool Joint_get_collide_connected(const b2Joint* self) {

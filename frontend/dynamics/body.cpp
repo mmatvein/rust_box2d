@@ -142,10 +142,10 @@ void Body_set_awake(b2Body* self, bool flag) {
 bool Body_is_awake(const b2Body* self) {
     return self->IsAwake();
 }
-void Body_set_active(b2Body* self, bool flag) { // TODO (Mikael) rename to set_enabled
+void Body_set_enabled(b2Body* self, bool flag) {
     self->SetEnabled(flag);
 }
-bool Body_is_active(const b2Body* self) {
+bool Body_is_enabled(const b2Body* self) {
     return self->IsEnabled();
 }
 void Body_set_fixed_rotation(b2Body* self, bool flag) {
