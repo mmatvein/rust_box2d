@@ -1,6 +1,3 @@
-#include <box2d/b2_distance.h>
-#include <box2d/b2_time_of_impact.h>
-
 void WorldManifold_Initialize(b2WorldManifold* self,
                               const b2Manifold* manifold,
                               const b2Transform* xf_a, f32 radius_a,

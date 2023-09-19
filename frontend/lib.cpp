@@ -1,4 +1,6 @@
 #include <box2d/box2d.h>
+#include <box2d/b2_time_of_impact.h>
+#include <box2d/b2_distance.h>
 #include <stdint.h>
 
 extern "C" {
