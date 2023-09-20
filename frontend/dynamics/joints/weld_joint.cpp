@@ -1,5 +1,4 @@
-// TODO (Mikael)
-/*b2Joint* World_create_weld_joint(
+b2Joint* World_create_weld_joint(
     b2World* world,
     b2Body* body_a,
     b2Body* body_b,
@@ -7,8 +6,8 @@
     b2Vec2 local_anchor_a,
     b2Vec2 local_anchor_b,
     f32 reference_angle,
-    f32 frequency,
-    f32 damping_ratio
+    f32 stiffness,
+    f32 damping
 ) {
     b2WeldJointDef def;
     def.bodyA = body_a;
@@ -17,8 +16,8 @@
     def.localAnchorA = local_anchor_a;
     def.localAnchorB = local_anchor_b;
     def.referenceAngle = reference_angle;
-    def.frequencyHz = frequency;
-    def.dampingRatio = damping_ratio;
+    def.stiffness = stiffness;
+    def.damping = damping;
 
     return world->CreateJoint(&def);
 }
@@ -45,15 +44,15 @@ const b2Vec2* WeldJoint_get_local_anchor_b(const b2WeldJoint* self) {
 f32 WeldJoint_get_reference_angle(const b2WeldJoint* self) {
     return self->GetReferenceAngle();
 }
-void WeldJoint_set_frequency(b2WeldJoint* self, f32 frequency) {
-    self->SetFrequency(frequency);
+void WeldJoint_set_stiffness(b2WeldJoint* self, f32 frequency) {
+    self->SetStiffness(frequency);
 }
-f32 WeldJoint_get_frequency(const b2WeldJoint* self) {
-    return self->GetFrequency();
+f32 WeldJoint_get_stiffness(const b2WeldJoint* self) {
+    return self->GetStiffness();
 }
-void WeldJoint_set_damping_ratio(b2WeldJoint* self, f32 ratio) {
-    self->SetDampingRatio(ratio);
+void WeldJoint_set_damping(b2WeldJoint* self, f32 ratio) {
+    self->SetDamping(ratio);
 }
-f32 WeldJoint_get_damping_ratio(const b2WeldJoint* self) {
-    return self->GetDampingRatio();
-}*/
+f32 WeldJoint_get_damping(const b2WeldJoint* self) {
+    return self->GetDamping();
+}
