@@ -24,7 +24,6 @@ pub mod mouse;
 pub mod prismatic;
 pub mod pulley;
 pub mod revolute;
-pub mod rope;
 pub mod weld;
 pub mod wheel;
 
@@ -36,7 +35,6 @@ pub use self::mouse::{MouseJoint, MouseJointDef};
 pub use self::prismatic::{PrismaticJoint, PrismaticJointDef};
 pub use self::pulley::{PulleyJoint, PulleyJointDef};
 pub use self::revolute::{RevoluteJoint, RevoluteJointDef};
-pub use self::rope::{RopeJoint, RopeJointDef};
 pub use self::weld::{WeldJoint, WeldJointDef};
 pub use self::wheel::{WheelJoint, WheelJointDef};
 
@@ -59,7 +57,6 @@ pub enum JointType {
     Wheel,
     Weld,
     Friction,
-    Rope,
     Motor,
 }
 
@@ -201,7 +198,6 @@ pub enum UnknownJoint {
     Wheel(WheelJoint),
     Weld(WeldJoint),
     Friction(FrictionJoint),
-    Rope(RopeJoint),
     Motor(MotorJoint),
 }
 
@@ -217,7 +213,6 @@ impl WrappedBase<ffi::Joint> for UnknownJoint {
             &Prismatic(ref x) => x.base_ptr(),
             &Pulley(ref x) => x.base_ptr(),
             &Revolute(ref x) => x.base_ptr(),
-            &Rope(ref x) => x.base_ptr(),
             &Weld(ref x) => x.base_ptr(),
             &Wheel(ref x) => x.base_ptr(),
             _ => panic!("Truly unknown joint"),
@@ -235,7 +230,6 @@ impl WrappedBase<ffi::Joint> for UnknownJoint {
             &mut Prismatic(ref mut x) => x.mut_base_ptr(),
             &mut Pulley(ref mut x) => x.mut_base_ptr(),
             &mut Revolute(ref mut x) => x.mut_base_ptr(),
-            &mut Rope(ref mut x) => x.mut_base_ptr(),
             &mut Weld(ref mut x) => x.mut_base_ptr(),
             &mut Wheel(ref mut x) => x.mut_base_ptr(),
             _ => panic!("Truly unknown joint"),
@@ -258,7 +252,6 @@ impl FromFFI<ffi::Joint> for UnknownJoint {
             JointType::Wheel => Wheel(WheelJoint::from_ffi(ptr)),
             JointType::Weld => Weld(WeldJoint::from_ffi(ptr)),
             JointType::Friction => Friction(FrictionJoint::from_ffi(ptr)),
-            JointType::Rope => Rope(RopeJoint::from_ffi(ptr)),
             JointType::Motor => Motor(MotorJoint::from_ffi(ptr)),
             _ => Unknown,
         }

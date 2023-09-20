@@ -44,7 +44,6 @@ struct RustFatObject {
 #include "dynamics/joints/prismatic_joint.cpp"
 #include "dynamics/joints/pulley_joint.cpp"
 #include "dynamics/joints/revolute_joint.cpp"
-#include "dynamics/joints/rope_joint.cpp"
 #include "dynamics/joints/weld_joint.cpp"
 #include "dynamics/joints/wheel_joint.cpp"
 
