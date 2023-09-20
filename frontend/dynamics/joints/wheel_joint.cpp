@@ -1,5 +1,4 @@
-// TODO (Mikael)
-/*b2Joint* World_create_wheel_joint(
+b2Joint* World_create_wheel_joint(
     b2World* world,
     b2Body* body_a,
     b2Body* body_b,
@@ -10,8 +9,8 @@
     bool enable_motor,
     f32 max_motor_torque,
     f32 motor_speed,
-    f32 frequency,
-    f32 damping_ratio
+    f32 stiffness,
+    f32 damping
 ) {
     b2WheelJointDef def;
     def.bodyA = body_a;
@@ -23,8 +22,8 @@
     def.enableMotor = enable_motor;
     def.maxMotorTorque = max_motor_torque;
     def.motorSpeed = motor_speed;
-    def.frequencyHz = frequency;
-    def.dampingRatio = damping_ratio;
+    def.stiffness = stiffness;
+    def.damping = damping;
 
     return world->CreateJoint(&def);
 }
@@ -55,8 +54,11 @@ const b2Vec2* WheelJoint_get_local_axis_a(const b2WheelJoint* self) {
 f32 WheelJoint_get_joint_translation(const b2WheelJoint* self) {
     return self->GetJointTranslation();
 }
-f32 WheelJoint_get_joint_speed(const b2WheelJoint* self) {
-    return self->GetJointSpeed();
+f32 WheelJoint_get_joint_linear_speed(const b2WheelJoint* self) {
+    return self->GetJointLinearSpeed();
+}
+f32 WheelJoint_get_joint_angular_speed(const b2WheelJoint* self) {
+    return self->GetJointAngularSpeed();
 }
 bool WheelJoint_is_motor_enabled(const b2WheelJoint* self) {
     return self->IsMotorEnabled();
@@ -79,15 +81,15 @@ f32 WheelJoint_get_max_motor_torque(const b2WheelJoint* self) {
 f32 WheelJoint_get_motor_torque(const b2WheelJoint* self, f32 inv_dt) {
     return self->GetMotorTorque(inv_dt);
 }
-void WheelJoint_set_spring_frequency(b2WheelJoint* self, f32 frequency) {
-    self->SetSpringFrequencyHz(frequency);
+void WheelJoint_set_stiffness(b2WheelJoint* self, f32 stiffness) {
+    self->SetStiffness(stiffness);
 }
-f32 WheelJoint_get_spring_frequency(const b2WheelJoint* self) {
-    return self->GetSpringFrequencyHz();
+f32 WheelJoint_get__stiffness(const b2WheelJoint* self) {
+    return self->GetStiffness();
 }
-void WheelJoint_set_spring_damping_ratio(b2WheelJoint* self, f32 ratio) {
-    self->SetSpringDampingRatio(ratio);
+void WheelJoint_set_damping(b2WheelJoint* self, f32 ratio) {
+    self->SetDamping(ratio);
 }
-f32 WheelJoint_get_spring_damping_ratio(const b2WheelJoint* self) {
-    return self->GetSpringDampingRatio();
-}*/
+f32 WheelJoint_get_damping(const b2WheelJoint* self) {
+    return self->GetDamping();
+}
