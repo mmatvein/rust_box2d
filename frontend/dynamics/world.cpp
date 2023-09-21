@@ -140,6 +140,9 @@ const b2ContactManager* World_get_contact_manager(const b2World* self) {
 const b2Profile* World_get_profile(const b2World* self) {
     return &self->GetProfile();
 }
+b2ParticleSystem* World_create_particle_system(b2World* self, const b2ParticleSystemDef* def) {
+    return self->CreateParticleSystem(def);
+}
 
 void World_dump(b2World* self) {
     self->Dump();

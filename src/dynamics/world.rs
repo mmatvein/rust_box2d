@@ -17,16 +17,20 @@ use std::cell::{Ref, RefMut};
 use std::marker::PhantomData;
 use std::mem;
 use std::ptr;
+use b2::particle_system::ffi::ParticleSystem;
+use b2::particle_system::ParticleSystemDef;
 use user_data::UserDataTypes;
 use wrap::*;
 
 pub type BodyHandle = TypedHandle<Body>;
 pub type JointHandle = TypedHandle<dyn Joint>;
+pub type ParticleSystemHandle = TypedHandle<ParticleSystem>;
 
 pub struct World<U: UserDataTypes> {
     ptr: *mut ffi::World,
     bodies: HandleMap<MetaBody<U>, Body>,
     joints: HandleMap<MetaJoint<U>, dyn Joint>,
+    particle_system: Vec<ParticleSystemHandle>,
     contact_filter_link: ContactFilterLink,
     contact_listener_link: ContactListenerLink,
     draw_link: DrawLink,
@@ -52,6 +56,7 @@ impl<U: UserDataTypes> World<U> {
                 contact_filter_link: ContactFilterLink::new(),
                 contact_listener_link: ContactListenerLink::new(),
                 draw_link: DrawLink::new(),
+                particle_system: Vec::new()
             }
         }
     }
@@ -142,6 +147,21 @@ impl<U: UserDataTypes> World<U> {
 
     pub fn joints(&self) -> HandleIter<dyn Joint, MetaJoint<U>> {
         self.joints.iter()
+    }
+
+    /*    pub fn create_body_with(&mut self, def: &BodyDef, data: U::BodyData) -> BodyHandle {
+        unsafe {
+            let body = ffi::World_create_body(self.mut_ptr(), def);
+            self.bodies.insert_with(|h| MetaBody::new(body, h, data))
+        }
+    }
+*/
+
+    pub fn create_particle_system(&mut self, def: &ParticleSystemDef) -> ParticleSystemHandle {
+        unsafe {
+            let particle_system = ffi::World_create_particle_system(self.mut_ptr(), def);
+            self.particle_system.push(ParticleSystemHandle(particle_system));
+        }
     }
 
     pub fn step(
@@ -355,6 +375,7 @@ impl<'a> Iterator for ContactIter<'a> {
 
 #[doc(hidden)]
 pub mod ffi {
+    use b2::particle_system::ffi::ParticleSystem;
     pub use super::callbacks::ffi::{
         ContactFilter, ContactListener, QueryCallback, RayCastCallback,
     };
@@ -366,6 +387,7 @@ pub mod ffi {
     pub use dynamics::contacts::ffi::{Contact, Contact_get_next, Contact_get_next_const};
     pub use dynamics::joints::ffi::Joint;
     use dynamics::Profile;
+    use particle::particle_system::ParticleSystemDef;
 
     pub enum World {}
 
@@ -424,5 +446,6 @@ pub mod ffi {
         // pub fn World_get_contact_manager(slf: *const World) -> *const ContactManager;
         pub fn World_get_profile(slf: *const World) -> *const Profile;
         pub fn World_dump(slf: *mut World);
+        pub fn World_create_particle_system(slf: *const World, def: *const ParticleSystemDef) -> *mut ParticleSystem;
     }
 }

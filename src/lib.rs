@@ -106,6 +106,7 @@ pub mod dynamics;
 #[cfg(feature = "serialize")]
 pub mod serialize;
 pub mod user_data;
+pub mod particle;
 
 pub mod b2 {
     pub use collision::shapes::{
@@ -136,4 +137,5 @@ pub mod b2 {
     };
     pub use dynamics::world::{BodyHandle, JointHandle, World};
     pub use dynamics::Profile;
+    pub use particle::particle_system;
 }

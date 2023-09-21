@@ -47,4 +47,6 @@ struct RustFatObject {
 #include "dynamics/joints/weld_joint.cpp"
 #include "dynamics/joints/wheel_joint.cpp"
 
+#include "particle/particle_system.cpp"
+
 }
